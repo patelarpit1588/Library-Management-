@@ -18,6 +18,10 @@ function Sidebar() {
         <li className="px-4 py-3 rounded-lg hover:bg-blue-600 cursor-pointer transition-all duration-300">
           Books
         </li>
+        
+        <li className="px-4 py-3 rounded-lg hover:bg-blue-600 cursor-pointer transition-all duration-300">
+          Users
+        </li>
 
         <li className="px-4 py-3 rounded-lg hover:bg-blue-600 cursor-pointer transition-all duration-300">
           Issue Book

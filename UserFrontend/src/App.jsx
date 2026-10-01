@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
+import Viewbook from "./pages/Viewbook"
+import Books from "./pages/Books"
 
 function App() {
 
@@ -17,6 +19,14 @@ function App() {
     {
       path: "/signup",
       element: <Signup />
+    },
+    {
+      path: "/viewbook/:id",
+      element: <Viewbook />
+    },
+    {
+      path: "/books",
+      element: <Books />
     },
 
 
