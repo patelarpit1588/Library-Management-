@@ -16,7 +16,6 @@ function Home() {
   useEffect(() => {
     axios.get(`http://localhost:3000/api/book/allbook`)
       .then((res) => {
-        console.log(res.data)
         setBooks(res.data)
       })
       .catch((err) => console.log(err))
@@ -137,7 +136,7 @@ function Home() {
 
   {/* Books Grid */}
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-    {books.map((book) => (
+    {books.slice(0,4).map((book) => (
       <div
         key={book._id}
         className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
@@ -168,7 +167,7 @@ function Home() {
           <button
             type="button"
             onClick={() => navigate(`/viewbook/${book._id}`)}
-            className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-2 rounded-xl font-medium transition"
+            className="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl font-medium transition"
           >
             View Details
           </button>

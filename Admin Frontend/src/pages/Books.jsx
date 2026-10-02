@@ -49,7 +49,7 @@ function Books() {
             Books Management
           </h1>
 
-          <div className="mt-3 h-1.5 w-40 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"></div>
+          <div className="mt-3 ml-20 h-1 w-70 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full"></div>
 
           <p className="mt-4 text-lg text-gray-500">
             Manage and organize your library books efficiently.

@@ -76,7 +76,7 @@ function Books() {
           <button
             type="button"
             onClick={() => navigate(`/viewbook/${book._id}`)}
-            className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-2 rounded-xl font-medium transition"
+            className="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl font-medium transition"
           >
             View Details
           </button>

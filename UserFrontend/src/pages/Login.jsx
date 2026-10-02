@@ -2,10 +2,14 @@ import { useState } from "react";
 import bgImage from "../assets/bg_image.avif";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {useDispatch} from "react-redux"
+import { login } from "../store/authSlice";
 
 function Login() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [data, setData] = useState({
         email: "",
         password: "",
@@ -18,9 +22,12 @@ function Login() {
         })
         .then((res) =>{
             alert(res.data.message)
+            
+            if(res.data.token && res.data.user){ 
 
-            if(res.data.token){ 
+                const userData = res.data.user
                 localStorage.setItem("token" , res.data.token)
+                dispatch(login({name : userData.name , email : userData.email}))
                 navigate("/")
             }
 })
