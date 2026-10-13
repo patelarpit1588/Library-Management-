@@ -13,9 +13,10 @@ function Footer() {
         </div>
         <div className="flex justify-center mt-5 gap-5 text-white text-lg">
             <Link to="/" className=" hover:text-green-500">Home</Link>
-            <Link to="/" className=" hover:text-green-500">Books</Link>
+            <Link to="/books" className=" hover:text-green-500">Books</Link>
             <Link to="/" className=" hover:text-green-500">About</Link>
             <Link to="/" className=" hover:text-green-500">Contact</Link>
+            <Link to="/" className=" hover:text-green-500">My Books</Link>
         </div>
         <div className="text-white text-lg mt-5 ">
             <p>C. 2026 LibraHub. All rights reserverd </p>

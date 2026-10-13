@@ -8,13 +8,6 @@ function Navbar() {
 
     const authStatus = useSelector((state) => state.auth.authstatus)
     const userData = useSelector((state) => state.auth.userData)
-    const auth = useSelector((state) => state.auth)
-    
-
-    console.log(auth);
-    console.log(authStatus);
-console.log(userData);
-
 
     return (
         <div className="flex justify-between  px-25 bg-gray-50 h-17 w-screen ">
@@ -35,17 +28,17 @@ console.log(userData);
 
             {
                 authStatus ?
-                   <div>
+                    <div>
                         <button
                             type="button"
                             className="bg-red-600 hover:bg-red-700 text-white mt-4 px-7 py-2 border rounded-xl "
-                            onClick={() => navigate("/login")}
+                            onClick={() => navigate("/logout")}
                         >
                             Logout
                         </button>
                     </div>
                     :
-                      <div>
+                    <div>
                         <button
                             type="button"
                             className="bg-green-800 hover:cursor-pointer text-white mt-4 px-7 py-2 border rounded-xl "
@@ -61,7 +54,7 @@ console.log(userData);
                             SignUp
                         </button>
                     </div>
-                   
+
             }
 
         </div>

@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Viewbook from "./pages/Viewbook"
 import Books from "./pages/Books"
+import Logout from "./pages/Logout"
 
 function App() {
 
@@ -15,6 +16,10 @@ function App() {
     {
       path: "/login",
       element: <Login />
+    },
+    {
+      path: "/logout",
+      element: <Logout />
     },
     {
       path: "/signup",

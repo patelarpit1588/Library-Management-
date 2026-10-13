@@ -4,6 +4,8 @@ import AddBook from "./pages/AddBook";
 import Books from "./pages/Books";
 import EditBook from "./pages/EditBook"
 import ViewBook from "./pages/ViewBook";
+import Logout from "./pages/Logout";
+import IssueBook from "./pages/IssueBook";
 
 function App() {
   const router = createBrowserRouter([
@@ -24,6 +26,13 @@ function App() {
   },{
     path : "/viewbook/:id",
     element : <ViewBook />
+  },{
+    path : "/logout",
+    element : <Logout />
+  },
+  {
+    path : "/issuebook",
+    element : <IssueBook />
   }
 ]);
   return (
