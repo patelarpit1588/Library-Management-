@@ -37,6 +37,31 @@ exports.confirmBook = async(req,res) =>{
     }
 }
 
+exports.rejectRequest = async(req,res) =>{
+    try {
+        const id = req.params.id;
+        await issueBook.findByIdAndUpdate(id , {status :"rejected"} ,{returnDocument:'after'} );
+        res.status(200).json({message : "Book issue request rejected"})
+
+    } catch (error) {
+        res.status(500).json(error)
+        console.log(error);
+        
+    }
+}
+exports.returnBook = async(req,res) =>{
+    try {
+        const id = req.params.id;
+        await issueBook.findByIdAndUpdate(id , {status :"returned"} ,{returnDocument:'after'} );
+        res.status(200).json({message : "Book marked as returned"})
+
+    } catch (error) {
+        res.status(500).json(error)
+        console.log(error);
+        
+    }
+}
+
 exports.getAllRequest = async (req,res) =>{
     try {
 
@@ -46,6 +71,19 @@ exports.getAllRequest = async (req,res) =>{
     } catch (error) {
         console.log(error);
         res.status(500).json(error)
+        
+    }
+}
+
+exports.deleteRecord = async(req,res) =>{
+    try {
+        const id = req.params.id;
+        await issueBook.findByIdAndDelete(id)
+        res.status(200).json({message :"Record deleted successfully"})
+        
+    } catch (error) {
+        res.status(500).json(error)
+        console.log(error);
         
     }
 }

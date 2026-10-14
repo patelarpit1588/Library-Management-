@@ -1,10 +1,13 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import {login} from "../store/authSlice"
+import {useDispatch} from "react-redux"
 import axios from "axios";
 
 function Login() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [data, setData] = useState({
         email: '',
@@ -18,8 +21,10 @@ function Login() {
 
             alert(data.message)
             if(data.token){
+                const admin = res.data.user
                 localStorage.setItem("token",data.token)
                 navigate("/books")
+                dispatch(login({name:admin.name,email:admin.email}))
             }
         })
         .catch((err) => console.log(err))
