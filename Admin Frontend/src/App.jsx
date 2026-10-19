@@ -6,6 +6,8 @@ import EditBook from "./pages/EditBook"
 import ViewBook from "./pages/ViewBook";
 import Logout from "./pages/Logout";
 import IssueBook from "./pages/IssueBook";
+import Users from "./pages/Users";
+import AdminProfile from "./pages/AdminProfile";
 
 function App() {
   const router = createBrowserRouter([
@@ -33,6 +35,14 @@ function App() {
   {
     path : "/issuebook",
     element : <IssueBook />
+  },
+  {
+    path : "/users",
+    element : <Users />
+  },
+  {
+    path : "/profile",
+    element : <AdminProfile />
   }
 ]);
   return (

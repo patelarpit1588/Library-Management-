@@ -5,6 +5,7 @@ import Signup from "./pages/Signup"
 import Viewbook from "./pages/Viewbook"
 import Books from "./pages/Books"
 import Logout from "./pages/Logout"
+import UserProfile from "./pages/UserProfile"
 
 function App() {
 
@@ -32,6 +33,10 @@ function App() {
     {
       path: "/books",
       element: <Books />
+    },
+    {
+      path: "/profile",
+      element: <UserProfile />
     },
 
 

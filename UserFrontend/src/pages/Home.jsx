@@ -49,6 +49,7 @@ function Home() {
           <button
             className='bg-green-800 text-white text-lg px-2 py-2 mt-5 border-green-900 rounded-lg'
             type="button"
+            onClick={() => navigate("/books")}
           >
             Explore Books
           </button>

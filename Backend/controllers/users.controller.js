@@ -32,3 +32,15 @@ exports.login = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+exports.getAllUsers = async(req,res) =>{
+    try {
+        const data = await users.find()
+
+        if(data) res.status(200).json(data)
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}
