@@ -16,19 +16,30 @@ function Login() {
     })
 
     const submit = () => {
-        axios.post(`http://localhost:3000/api/admin/login`, data)
+        axios.post("http://localhost:3000/api/admin/login", data)
             .then((res) => {
-                const data = res.data
+                const responseData = res.data;
 
-                alert(data.message)
-                if (data.token) {
-                    const admin = res.data.user
-                    localStorage.setItem("token", data.token)
-                    navigate("/books")
-                    dispatch(login({ name: admin.name, email: admin.email }))
+                alert(responseData.message);
+
+                if (responseData.token) {
+                    
+                    const admin = responseData.user;
+
+                    localStorage.setItem("token", responseData.token);
+
+                    dispatch(login({
+                        id:admin._id,
+                        name: admin.name,
+                        email: admin.email,
+                        phone: admin.phone
+                    }));
+                    navigate("/books");
                 }
             })
-            .catch((err) => console.log(err))
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     return (

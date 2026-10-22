@@ -12,7 +12,6 @@ function IssueBook() {
 
     axios.get(`http://localhost:3000/api/issuebook/allrequest`)
       .then((res) => {
-        console.log("Data of API",res.data)
         setData(res.data)
       })
       .catch((err) => console.log(err))
