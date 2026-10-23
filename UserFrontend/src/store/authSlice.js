@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    authstatus : false,
-    userData : null
-}
+    userData: JSON.parse(localStorage.getItem("userData")) || null,
+    authstatus: !!localStorage.getItem("userData")
+};
 
 const authSlice = createSlice({
     name : "auth",
@@ -12,6 +12,7 @@ const authSlice = createSlice({
         login : (state,action) =>{
             state.authstatus = true
             state.userData = action.payload
+            localStorage.setItem("userData",JSON.stringify(action.payload))
         },
         logout :(state,action) =>{
             state.authstatus = false;

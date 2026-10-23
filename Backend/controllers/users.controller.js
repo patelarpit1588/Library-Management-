@@ -44,3 +44,40 @@ exports.getAllUsers = async(req,res) =>{
         res.status(500).json(error)
     }
 }
+
+exports.getPassword = async(req,res) =>{
+    try {
+        const id = req.params.id;
+        const data = await users.findById(id,{password:1,_id:0})
+        res.status(200).json(data)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}
+
+exports.changePassword = async(req,res) =>{
+    try {
+        const id = req.params.id;
+        const newPassword = req.body.newPassword
+        const data = await users.findByIdAndUpdate(id,{password:newPassword},{returnDocument:"after"})
+        res.status(200).json({message:"Password Changes successfully"})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}
+
+exports.editProfile = async(req,res) =>{
+    try {
+        const id =req.params.id
+        const newData = req.body
+        console.log(newData);
+        
+        const data = await users.findByIdAndUpdate(id, newData, {returnDocument:'after'})
+        res.status(200).json({message:"Profile updated successfully"})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}

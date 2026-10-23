@@ -27,7 +27,7 @@ function Login() {
 
                 const userData = res.data.user
                 localStorage.setItem("token" , res.data.token)
-                dispatch(login({id : userData._id ,name : userData.name , email : userData.email}))
+                dispatch(login({id : userData._id ,name : userData.name , email : userData.email,phone : userData.phone}))
                 navigate("/")
             }
 })

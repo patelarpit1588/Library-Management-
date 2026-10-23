@@ -87,3 +87,14 @@ exports.deleteRecord = async(req,res) =>{
         
     }
 }
+
+exports.getUserBooks = async(req,res) =>{
+    try {
+        const id = req.params.id;
+        const data = await issueBook.find({user:id}).populate("book").populate("user")
+        res.status(200).json(data)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+    }
+}
