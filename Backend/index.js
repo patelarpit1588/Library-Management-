@@ -30,6 +30,8 @@ app.use("/api/users" , require("./routes/users.routes"))
 
 app.use("/api/issuebook" , require("./routes/issueBook.routes"))
 
+app.use("/api/query" , require("./routes/queries.routes"))
+
 app.listen(PORT, () => {
     console.log(`server is running at port ${PORT}`);
 });

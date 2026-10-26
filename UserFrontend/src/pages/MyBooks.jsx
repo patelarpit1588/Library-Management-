@@ -74,6 +74,12 @@ function MyBooks() {
             </div>
         </div>
 
+        {
+            books.length === 0 && <div className='flex-1'>
+                <p className='text-center text-2xl text-gray-500 '>You have no books to display.</p>
+                </div>
+        }
+
         <Footer />
 
     </div>

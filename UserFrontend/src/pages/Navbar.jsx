@@ -23,8 +23,8 @@ function Navbar() {
             <div className="flex justify-center mt-5 gap-10 text-lg">
                 <Link to="/" className=" hover:text-green-500">Home</Link>
                 <Link to="/books" className=" hover:text-green-500">Books</Link>
-                <Link to="/about" className=" hover:text-green-500">About</Link>
                 <Link to="/mybooks" className=" hover:text-green-500">My Books</Link>
+                <Link to="/contact" className=" hover:text-green-500">Contact Us</Link>
                 <Link to="/profile" className=" hover:text-green-500">Profile</Link>
             </div>
 

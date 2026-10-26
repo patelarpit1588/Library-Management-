@@ -7,6 +7,7 @@ import Books from "./pages/Books"
 import Logout from "./pages/Logout"
 import UserProfile from "./pages/UserProfile"
 import MyBooks from "./pages/MyBooks"
+import ContactUs from "./pages/ContactUs"
 
 function App() {
 
@@ -46,6 +47,10 @@ function App() {
     {
       path: "/profile",
       element: <UserProfile />
+    },
+    {
+      path: "/contact",
+      element: <ContactUs />
     },
 
 

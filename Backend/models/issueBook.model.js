@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const isuueBookShema = mongoose.Schema({
+const isuueBookSchema = mongoose.Schema({
     book : {
         type : mongoose.Schema.Types.ObjectId,
         ref :"booksCollection"
@@ -16,4 +16,4 @@ const isuueBookShema = mongoose.Schema({
 }
 })
 
-module.exports = mongoose.model("issueBookCollection" , isuueBookShema)
+module.exports = mongoose.model("issueBookCollection" , isuueBookSchema)

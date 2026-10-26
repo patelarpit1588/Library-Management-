@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const usersShema = mongoose.Schema({
+const usersSchema = mongoose.Schema({
     name: String,
     email: {
         type: String,
@@ -10,4 +10,4 @@ const usersShema = mongoose.Schema({
     phone: String
 })
 
-module.exports = mongoose.model("usersCollection", usersShema)
+module.exports = mongoose.model("usersCollection", usersSchema)

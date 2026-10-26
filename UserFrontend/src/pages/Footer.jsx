@@ -15,8 +15,8 @@ function Footer() {
         <div className="flex justify-center mt-5 gap-5 text-white text-lg">
             <Link to="/" className=" hover:text-green-500">Home</Link>
             <Link to="/books" className=" hover:text-green-500">Books</Link>
-            <Link to="/about" className=" hover:text-green-500">About</Link>
             <Link to="/mybooks" className=" hover:text-green-500">My Books</Link>
+            <Link to="/contact" className=" hover:text-green-500">Contact Us</Link>
             <Link to="/profile" className=" hover:text-green-500">Profile</Link>
         </div>
        <div className=" flex items-center gap-2 text-lg text-white"> <img src={copyright} alt="Copyright" className="h-5 w-5 brightness-0 invert" />
