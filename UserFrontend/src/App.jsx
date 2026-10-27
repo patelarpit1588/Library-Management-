@@ -8,6 +8,7 @@ import Logout from "./pages/Logout"
 import UserProfile from "./pages/UserProfile"
 import MyBooks from "./pages/MyBooks"
 import ContactUs from "./pages/ContactUs"
+import MyQueries from "./pages/MyQueries"
 
 function App() {
 
@@ -52,8 +53,10 @@ function App() {
       path: "/contact",
       element: <ContactUs />
     },
-
-
+    {
+      path: "/myqueries",
+      element: <MyQueries />
+    },
 
   ])
 
