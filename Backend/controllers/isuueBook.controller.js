@@ -75,19 +75,6 @@ exports.getAllRequest = async (req,res) =>{
     }
 }
 
-exports.deleteRecord = async(req,res) =>{
-    try {
-        const id = req.params.id;
-        await issueBook.findByIdAndDelete(id)
-        res.status(200).json({message :"Record deleted successfully"})
-        
-    } catch (error) {
-        res.status(500).json(error)
-        console.log(error);
-        
-    }
-}
-
 exports.getUserBooks = async(req,res) =>{
     try {
         const id = req.params.id;

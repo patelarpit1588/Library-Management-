@@ -9,8 +9,6 @@ router.put("/rejectbook/:id",controller.rejectRequest)
 
 router.put("/returnbook/:id",controller.returnBook)
 
-router.delete("/deleterecord/:id",controller.deleteRecord)
-
 router.get("/allrequest",controller.getAllRequest)
 
 router.get("/userbooks/:id",controller.getUserBooks)

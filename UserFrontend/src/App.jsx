@@ -57,7 +57,7 @@ function App() {
       path: "/myqueries",
       element: <MyQueries />
     },
-
+   
   ])
 
   return (

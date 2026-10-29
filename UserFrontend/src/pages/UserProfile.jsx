@@ -54,6 +54,7 @@ function UserProfile() {
                 setOldpass("")
                 setNewpass("")
                 setConpass("")
+                setTab("view")
               })
               .catch((err) => console.log(err))
           } else {

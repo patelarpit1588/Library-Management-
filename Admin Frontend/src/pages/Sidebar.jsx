@@ -74,6 +74,21 @@ function Sidebar() {
       Issue Book
     </NavLink>
   </li>
+  
+  <li>
+    <NavLink
+      to="/queries"
+      className={({ isActive }) =>
+        `block px-4 py-3 rounded-lg transition-all duration-300 ${
+          isActive
+            ? "bg-blue-600 text-white font-semibold"
+            : "hover:bg-blue-600"
+        }`
+      }
+    >
+      Queries
+    </NavLink>
+  </li>
 
   <li>
     <NavLink

@@ -24,8 +24,7 @@ function MyQueries()  {
   const [selectedQuery, setSelectedQuery] = useState(null);
 
   const userEmail = useSelector((state) => state.auth.userData?.email)
-
-  // Connect your backend data here later.
+  
   const [queries,setQueries] = useState([])
 
  useEffect(() => {

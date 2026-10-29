@@ -2,7 +2,7 @@ import { useState } from "react";
 import bgImage from "../assets/bg_image.avif";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux"
 import { login } from "../store/authSlice";
 
 function Login() {
@@ -15,23 +15,39 @@ function Login() {
         password: "",
     });
 
-    const submit = () => {
-        axios.post(`http://localhost:3000/api/users/login`,{
-            email : data.email,
-            password : data.password
-        })
-        .then((res) =>{
-            alert(res.data.message)
-            
-            if(res.data.token && res.data.user){ 
 
-                const userData = res.data.user
-                localStorage.setItem("token" , res.data.token)
-                dispatch(login({id : userData._id ,name : userData.name , email : userData.email,phone : userData.phone}))
-                navigate("/")
-            }
-})
+    const submit = () => {
+        axios
+            .post("http://localhost:3000/api/users/login", {
+                email: data.email,
+                password: data.password,
+            })
+            .then((res) => {
+                alert(res.data.message);
+
+                if (res.data.token && res.data.user) {
+                    const userData = res.data.user;
+
+                    sessionStorage.setItem("token", res.data.token);
+                    dispatch(
+                        login({
+                            id: userData._id,
+                            name: userData.name,
+                            email: userData.email,
+                            phone: userData.phone,
+                        })
+                    );
+
+                    navigate("/");
+                }
+            })
+            .catch((err) => {
+                console.error("Login error:", err);
+                alert(err.response?.data?.message || "Login failed");
+            });
     };
+
+
 
     return (
         <div

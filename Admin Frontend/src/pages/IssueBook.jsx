@@ -18,47 +18,37 @@ function IssueBook() {
 
   }, [])
 
-  const issueBook = (id) =>{
+  const issueBook = (id) => {
     const cnf = confirm("Are you sure you want to issue this book?")
-    if(!cnf) return ;
+    if (!cnf) return;
 
     axios.put(`http://localhost:3000/api/issuebook/confirmbook/${id}`)
-    .then((res) =>{
-      alert(res.data.message)
-    })
-    .catch ((err) => console.log(err))
+      .then((res) => {
+        alert(res.data.message)
+      })
+      .catch((err) => console.log(err))
   }
 
-  const rejectBook = (id) =>{
+  const rejectBook = (id) => {
     const cnf = confirm("Are you sure you want to reject this book request?")
-    if(!cnf) return ;
+    if (!cnf) return;
 
     axios.put(`http://localhost:3000/api/issuebook/rejectbook/${id}`)
-    .then((res) =>{
-      alert(res.data.message)
-    })
-    .catch ((err) => console.log(err))
+      .then((res) => {
+        alert(res.data.message)
+      })
+      .catch((err) => console.log(err))
 
   }
-  const returnBook = (id) =>{
+  const returnBook = (id) => {
     const cnf = confirm("Are you sure you want to mark this book as returned?")
-    if(!cnf) return ;
+    if (!cnf) return;
 
     axios.put(`http://localhost:3000/api/issuebook/returnbook/${id}`)
-    .then((res) =>{
-      alert(res.data.message)
-    })
-    .catch ((err) => console.log(err))
-
-  }
-
-  const deleteRecord = (id) =>{
-    const cnf = confirm("Are you sure you want to delete this record permanently?")
-    if(!cnf) return ;
-
-    axios.delete(`http://localhost:3000/api/isuuebook/deleterecord/${id}`)
-    .then((res) => console.log(res.data.message))
-    .catch((err) => console.log(err))
+      .then((res) => {
+        alert(res.data.message)
+      })
+      .catch((err) => console.log(err))
 
   }
 
@@ -156,50 +146,46 @@ function IssueBook() {
                     </td>
 
                     <td className="px-6 py-4">
-                      
-                    {
-                      request.status === "returned" ? 
-                      <div className='flex justify-center '>
-                      <button
-                          type="button"
-                          onClick={() => deleteRecord(request._id)}
-                          className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-semibold shadow-sm hover:bg-red-700 hover:shadow-md active:scale-95 transition-all duration-200"
-                          >
-                          Delete Record
-                        </button>
-                      </div>
-                      :
-                            request.status === "pending" ?
-                            
+
+                      {
+                        request.status === "returned" ?
+                          <div className='flex justify-center bg-green-200  text-md text-green-700 px-1 py-2 rounded-2xl'>
+                            Returned
+                          </div>
+                          :
+                          request.status === "pending" ?
+
                             <div className="flex items-center gap-3">
-                        <button
-                          type="button"
-                          onClick={() =>issueBook(request._id)}
-                          className="px-4 py-2 rounded-lg bg-green-600 text-white text-sm font-semibold shadow-sm hover:bg-green-700 hover:shadow-md active:scale-95 transition-all duration-200"
-                          >
-                          Issue
-                        </button>
+                              <button
+                                type="button"
+                                onClick={() => issueBook(request._id)}
+                                className="px-4 py-2 rounded-lg bg-green-600 text-white text-sm font-semibold shadow-sm hover:bg-green-700 hover:shadow-md active:scale-95 transition-all duration-200"
+                              >
+                                Issue
+                              </button>
 
-                        <button
-                          type="button"
-                          onClick={() => rejectBook(request._id)}
-                          className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-semibold shadow-sm hover:bg-red-700 hover:shadow-md active:scale-95 transition-all duration-200"
-                          >
-                          Reject
-                        </button>
-                        </div>
-                        :
+                              <button
+                                type="button"
+                                onClick={() => rejectBook(request._id)}
+                                className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-semibold shadow-sm hover:bg-red-700 hover:shadow-md active:scale-95 transition-all duration-200"
+                              >
+                                Reject
+                              </button>
+                            </div>
+                            :
+                            request.status === "rejected" ? <div className='flex justify-center bg-red-200  text-md text-red-700 px-1 py-2 rounded-2xl '>
+                              Rejected
+                            </div> :
+                              <button
+                                type="button"
+                                onClick={() => returnBook(request._id)}
+                                className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold shadow-sm hover:bg-blue-700 hover:shadow-md active:scale-95 transition-all duration-200"
+                              >
+                                Returned
+                              </button>
 
-                        <button
-                        type="button"
-                        onClick={() => returnBook(request._id)}
-                        className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold shadow-sm hover:bg-blue-700 hover:shadow-md active:scale-95 transition-all duration-200"
-                        >
-                          Returned
-                        </button>
+                      }
 
-                        }
-                          
                     </td>
                   </tr>
                 ))}

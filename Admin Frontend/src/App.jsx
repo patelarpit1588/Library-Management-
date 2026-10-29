@@ -8,6 +8,9 @@ import Logout from "./pages/Logout";
 import IssueBook from "./pages/IssueBook";
 import Users from "./pages/Users";
 import AdminProfile from "./pages/AdminProfile";
+import Queries from "./pages/Queries";
+import Reply from "./pages/Reply";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   const router = createBrowserRouter([
@@ -43,7 +46,20 @@ function App() {
   {
     path : "/profile",
     element : <AdminProfile />
-  }
+  },
+  {
+    path : "/queries",
+    element : <Queries />
+  },
+  {
+    path : "/reply/:id",
+    element : <Reply />
+  },
+   {
+      path: "/dashboard",
+      element: <AdminDashboard />
+    },
+
 ]);
   return (
     <>
