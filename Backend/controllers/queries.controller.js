@@ -1,4 +1,4 @@
-const queries = require("../models/queries.model.")
+const queries = require("../models/queries.model")
 
 exports.createQuery = async (req,res) =>{
     try {

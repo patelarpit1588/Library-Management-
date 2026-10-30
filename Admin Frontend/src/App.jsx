@@ -11,6 +11,7 @@ import AdminProfile from "./pages/AdminProfile";
 import Queries from "./pages/Queries";
 import Reply from "./pages/Reply";
 import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,44 +21,44 @@ function App() {
   },
   {
     path: "/addbook",
-    element: <AddBook />
+    element: <ProtectedRoutes><AddBook /></ProtectedRoutes>
   },
   {
     path: "/books",
-    element: <Books />
+    element: <ProtectedRoutes><Books /></ProtectedRoutes>
   },{
     path: "/editbook/:id",
-    element : <EditBook />
+    element : <ProtectedRoutes><EditBook /></ProtectedRoutes>
   },{
     path : "/viewbook/:id",
-    element : <ViewBook />
+    element : <ProtectedRoutes><ViewBook /></ProtectedRoutes>
   },{
     path : "/logout",
-    element : <Logout />
+    element : <ProtectedRoutes><Logout /></ProtectedRoutes>
   },
   {
     path : "/issuebook",
-    element : <IssueBook />
+    element : <ProtectedRoutes><IssueBook /></ProtectedRoutes>
   },
   {
     path : "/users",
-    element : <Users />
+    element : <ProtectedRoutes><Users /></ProtectedRoutes>
   },
   {
     path : "/profile",
-    element : <AdminProfile />
+    element : <ProtectedRoutes><AdminProfile /></ProtectedRoutes>
   },
   {
     path : "/queries",
-    element : <Queries />
+    element : <ProtectedRoutes><Queries /></ProtectedRoutes>
   },
   {
     path : "/reply/:id",
-    element : <Reply />
+    element : <ProtectedRoutes><Reply /></ProtectedRoutes>
   },
    {
       path: "/dashboard",
-      element: <AdminDashboard />
+      element: <ProtectedRoutes><AdminDashboard /></ProtectedRoutes>
     },
 
 ]);

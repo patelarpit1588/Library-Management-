@@ -7,8 +7,6 @@ function Logout() {
 
     const dispatch = useDispatch();
     dispatch(logout())
-    localStorage.removeItem("token")
-    
 
   return  <Navigate to="/" />
 }

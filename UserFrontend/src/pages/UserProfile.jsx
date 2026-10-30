@@ -70,7 +70,7 @@ function UserProfile() {
 
 
   return (
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col bg-gray-100">
 
         <Navbar />
       <div className="flex-1 mx-auto w-full max-w-4xl px-4 py-10 sm:px-8">

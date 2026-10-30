@@ -26,7 +26,8 @@ function Login() {
                     
                     const admin = responseData.user;
 
-                    localStorage.setItem("token", responseData.token);
+                    sessionStorage.setItem("token", responseData.token);
+                    sessionStorage.setItem("adminData", JSON.stringify(admin));
 
                     dispatch(login({
                         id:admin._id,
@@ -34,7 +35,7 @@ function Login() {
                         email: admin.email,
                         phone: admin.phone
                     }));
-                    navigate("/books");
+                    navigate("/dashboard");
                 }
             })
             .catch((err) => {

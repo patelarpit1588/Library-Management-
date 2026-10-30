@@ -19,7 +19,7 @@ function MyBooks() {
     }, [])
 
    return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-gray-100">
 
         <Navbar />
 

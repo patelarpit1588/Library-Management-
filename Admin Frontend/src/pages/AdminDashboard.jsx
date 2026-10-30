@@ -1,4 +1,4 @@
-
+import {useState, useEffect} from "react";
 import {
   BookOpen,
   BookCheck,
@@ -21,15 +21,36 @@ import {
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
+import axios from "axios";
 
 function AdminDashboard() {
   const navigate = useNavigate();
+
+  const [dashboardData, setDashboardData] = useState({
+    totalBooks: null,
+    borrowedBooks: null,
+    totalCategories: null,
+    totalUsers: null,
+    pendingRequests: null,
+    availableBooks: null,
+    totalCopies: null,
+  });
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/dashboard/getdashboarddata")
+      .then((response) => {
+        setDashboardData(response.data);
+      })
+      .catch((error) => {
+        console.log( error);
+      });
+  }, []);
 
   // No sample data. Connect your APIs when you want live statistics.
   const stats = [
     {
       title: "Total Books",
-      value: null,
+      value: dashboardData.totalBooks,
       description: "Books in your collection",
       icon: BookOpen,
       iconBg: "bg-blue-100",
@@ -38,7 +59,7 @@ function AdminDashboard() {
     },
     {
       title: "Borrowed Books",
-      value: null,
+      value: dashboardData.borrowedBooks,
       description: "Currently issued books",
       icon: BookCheck,
       iconBg: "bg-orange-100",
@@ -46,8 +67,8 @@ function AdminDashboard() {
       path: "/issuebook",
     },
     {
-      title: "Available Books",
-      value: null,
+      title: "Available Copies",
+      value: dashboardData.availableBooks ,
       description: "Books available to borrow",
       icon: BookCopy,
       iconBg: "bg-green-100",
@@ -56,7 +77,7 @@ function AdminDashboard() {
     },
     {
       title: "Total Categories",
-      value: null,
+      value: dashboardData.totalCategories,
       description: "Categories in your collection",
       icon: Tags,
       iconBg: "bg-purple-100",
@@ -65,7 +86,7 @@ function AdminDashboard() {
     },
     {
       title: "Total Users",
-      value: null,
+      value: dashboardData.totalUsers,
       description: "Registered library users",
       icon: Users,
       iconBg: "bg-indigo-100",
@@ -74,7 +95,7 @@ function AdminDashboard() {
     },
     {
       title: "Pending Requests",
-      value: null,
+      value: dashboardData.pendingRequests ,
       description: "Awaiting approval",
       icon: Clock,
       iconBg: "bg-yellow-100",
@@ -181,16 +202,7 @@ function AdminDashboard() {
                 users, issue requests, and user queries from one place.
               </p>
             </div>
-
-            <button
-              type="button"
-              onClick={() => navigate("/addbook")}
-              className="inline-flex items-center justify-center gap-2 self-start rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 font-semibold text-white shadow-lg shadow-blue-100 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              <Plus size={20} />
-              Add New Book
-            </button>
-
+         
           </section>
 
           {/* Statistics */}

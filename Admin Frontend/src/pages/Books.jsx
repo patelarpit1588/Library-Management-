@@ -7,7 +7,7 @@ import Topbar from "./Topbar";
 function Books() {
   const navigate = useNavigate();
 
-  const [search, setSearch] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -20,6 +20,14 @@ function Books() {
         console.log(err);
       });
   }, []);
+
+  const filteredBooks = books.filter((book) => {
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return (
+      book.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+      book.category.toLowerCase().includes(lowerCaseSearchTerm)
+    );
+  });
 
   const deleteBook = (id) => {
 
@@ -65,8 +73,8 @@ function Books() {
               <input
                 type="text"
                 placeholder="Search by title or category..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full border border-gray-200 rounded-2xl py-3 pl-12 pr-4 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
 
@@ -132,7 +140,7 @@ function Books() {
                 </thead>
 
                 <tbody>
-                  {books.map((book) => (
+                  {filteredBooks.map((book) => (
                     <tr
                       key={book._id}
                       className="border-t border-gray-100 hover:bg-blue-50 transition-all duration-200"
@@ -193,7 +201,7 @@ function Books() {
                     </tr>
                   ))}
 
-                  {books.length === 0 && (
+                  {filteredBooks.length === 0 && (
                     <tr>
                       <td
                         colSpan="7"

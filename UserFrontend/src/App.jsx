@@ -9,6 +9,7 @@ import UserProfile from "./pages/UserProfile"
 import MyBooks from "./pages/MyBooks"
 import ContactUs from "./pages/ContactUs"
 import MyQueries from "./pages/MyQueries"
+import ProtectedRoutes from "./ProtectedRoutes"
 
 function App() {
 
@@ -19,43 +20,39 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login />
+      element:<Login />
     },
     {
       path: "/logout",
-      element: <Logout />
+      element: <ProtectedRoutes><Logout /></ProtectedRoutes>
     },
     {
       path: "/signup",
-      element: <Signup />
+      element: <ProtectedRoutes><Signup /></ProtectedRoutes>  
     },
     {
       path: "/viewbook/:id",
-      element: <Viewbook />
+      element: <ProtectedRoutes><Viewbook /></ProtectedRoutes>
     },
     {
       path: "/books",
-      element: <Books />
+      element: <ProtectedRoutes><Books /></ProtectedRoutes>
     },
     {
       path: "/profile",
-      element: <UserProfile />
+      element: <ProtectedRoutes><UserProfile /></ProtectedRoutes>
     },
     {
       path: "/mybooks",
-      element: <MyBooks />
-    },
-    {
-      path: "/profile",
-      element: <UserProfile />
+      element: <ProtectedRoutes><MyBooks /></ProtectedRoutes>
     },
     {
       path: "/contact",
-      element: <ContactUs />
+      element: <ProtectedRoutes><ContactUs /></ProtectedRoutes>
     },
     {
       path: "/myqueries",
-      element: <MyQueries />
+      element: <ProtectedRoutes><MyQueries /></ProtectedRoutes>
     },
    
   ])

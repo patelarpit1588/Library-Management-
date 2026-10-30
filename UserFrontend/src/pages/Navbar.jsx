@@ -1,4 +1,4 @@
-import { Link, useNavigate,NavLink } from "react-router-dom"
+import { useNavigate,NavLink } from "react-router-dom"
 import Logo from "../assets/Logo.png"
 import { useSelector } from "react-redux"
 import { useState } from "react";
@@ -21,11 +21,11 @@ function Navbar() {
                 />
             </div>
             <div className="flex justify-center mt-5 gap-10 text-lg">
-                <Link to="/" className=" hover:text-green-500">Home</Link>
-                <Link to="/books" className=" hover:text-green-500">Books</Link>
-                <Link to="/mybooks" className=" hover:text-green-500">My Books</Link>
-                <Link to="/contact" className=" hover:text-green-500">Contact Us</Link>
-                <Link to="/profile" className=" hover:text-green-500">Profile</Link>
+                <NavLink to="/" className={({ isActive }) => ` ${isActive ? 'text-green-500' : 'hover:text-green-500'}`}>Home</NavLink>
+                <NavLink to="/books" className={({ isActive }) => ` ${isActive ? 'text-green-500' : 'hover:text-green-500'}`}>Books</NavLink>
+                <NavLink to="/mybooks" className={({ isActive }) => ` ${isActive ? 'text-green-500' : 'hover:text-green-500'}`}>My Books</NavLink>
+                <NavLink to="/contact" className={({ isActive }) => ` ${isActive ? 'text-green-500' : 'hover:text-green-500'}`}>Contact Us</NavLink>
+                <NavLink to="/profile" className={({ isActive }) => ` ${isActive ? 'text-green-500' : 'hover:text-green-500'}`}>Profile</NavLink>
             </div>
 
             {
@@ -73,7 +73,7 @@ function Navbar() {
                         <div className="absolute right-0 z-50 mt-3 w-56 overflow-hidden rounded-xl border border-gray-200 bg-white py-2 shadow-lg">
 
                             <NavLink
-                                to="/admin/profile"
+                                to="/profile"
                                 onClick={() => setShowProfile(false)}
                                 className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 transition hover:bg-blue-50 hover:text-blue-600"
                             >

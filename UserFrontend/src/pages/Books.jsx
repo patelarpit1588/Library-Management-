@@ -8,6 +8,7 @@ function Books() {
 
     const navigate = useNavigate()
     const [books,setBook] = useState([])
+    const [searchTerm,setSearchTerm] = useState("")
 
     useEffect(() =>{
         axios.get(`http://localhost:3000/api/book/allbook`)
@@ -16,6 +17,13 @@ function Books() {
     )
     .catch((err)=> console.log(err) )
     },[])
+
+    const filteredBooks = books.filter((book) => {
+        return (
+          book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          book.category.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+    })
 
   return (
     <div>
@@ -37,15 +45,15 @@ function Books() {
             <input 
             type='text'
             className='w-full px-15 py-3 bg-white rounded-2xl border-2 focus:border-blue-500  outline-none'
-            placeholder='Serch books...'
-
-
+            placeholder='Search books by title or category'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             />
 
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
-    {books.map((book) => (
+    {filteredBooks.map((book) => (
       <div
         key={book._id}
         className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
@@ -83,6 +91,13 @@ function Books() {
         </div>
       </div>
     ))}
+    {
+      filteredBooks.length === 0 && (
+        <p className="text-gray-500 text-center col-span-full text-lg">
+          No books found.
+        </p>
+      )
+    }
   </div>
       
     </div>

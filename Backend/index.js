@@ -32,6 +32,8 @@ app.use("/api/issuebook" , require("./routes/issueBook.routes"))
 
 app.use("/api/query" , require("./routes/queries.routes"))
 
+app.use("/api/dashboard" , require("./routes/dashboard.routes"))
+
 app.listen(PORT, () => {
     console.log(`server is running at port ${PORT}`);
 });
