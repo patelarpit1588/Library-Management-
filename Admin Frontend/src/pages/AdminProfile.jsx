@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 function AdminProfile() {
 
   const dispatch = useDispatch()
+  const token = sessionStorage.getItem("token")
   const [tab, setTab] = useState('view');
 
   const [oldpass, setOldpass] = useState("")
@@ -27,27 +28,39 @@ function AdminProfile() {
 
   const editProfile = () => {
 
-    axios.put(`http://localhost:3000/api/admin/editprofile/${adminData.id}`, { name: editData.name, email:  editData.email, phone: editData.phone })
-    .then((res) => {
-      alert(res.data.message)
-      dispatch(login({
-        id:adminData.id,
-        name:editData.name,
-        email:editData.email,
-        phone:editData.phone
-      }))
+    axios.put(`http://localhost:3000/api/admin/editprofile/${adminData.id}`, { name: editData.name, email: editData.email, phone: editData.phone }, {
+      headers: {
+        Authorization: token
+      }
     })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        alert(res.data.message)
+        dispatch(login({
+          id: adminData.id,
+          name: editData.name,
+          email: editData.email,
+          phone: editData.phone
+        }))
+      })
+      .catch((err) => console.log(err))
   }
   const changePass = () => {
-    axios.post(`http://localhost:3000/api/admin/getpassword/${adminData.id}`)
+    axios.post(`http://localhost:3000/api/admin/getpassword/${adminData.id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
       .then((res) => {
 
         const adminpass = res.data.password
 
         if (adminpass === oldpass) {
           if (newpass === conpass) {
-            axios.put(`http://localhost:3000/api/admin/changepassword/${adminData.id}`, {newPassword: newpass })
+            axios.put(`http://localhost:3000/api/admin/changepassword/${adminData.id}`, { newPassword: newpass }, {
+              headers: {
+                Authorization: token
+              }
+            })
               .then((res) => {
                 alert(res.data.message)
                 setOldpass("")

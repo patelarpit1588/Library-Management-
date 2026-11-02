@@ -6,8 +6,13 @@ exports.issueRequest = async(req,res) =>{
 
         const {book,user} = req.body;
 
+        const existingRequest = await issueBook.findOne({ book, user, status: { $in: ["pending", "issued"] } });
+        if (existingRequest) {
+            return res.status(200).json({ message: "You already have a pending or issued request for this book.",status:"error" });
+        }
+
         const result = await issueBook.create({book,user,status:"pending"})
-        if(result) res.status(200).json({message :"Your request submiteed successfully"})
+        if(result) res.status(200).json({message :"Your request submiteed successfully",status:"success"})
         
     } catch (error) {
         console.log(error);
@@ -52,8 +57,14 @@ exports.rejectRequest = async(req,res) =>{
 exports.returnBook = async(req,res) =>{
     try {
         const id = req.params.id;
-        await issueBook.findByIdAndUpdate(id , {status :"returned"} ,{returnDocument:'after'} );
+        const result = await issueBook.findByIdAndUpdate(id , {status :"returned"} ,{returnDocument:'after'} );
         res.status(200).json({message : "Book marked as returned"})
+
+        const book = await book.findById(result.book)
+        if(book){
+            const updatedQuantity = Number(book.quantity) + 1;
+            await book.findByIdAndUpdate(result.book, { quantity: updatedQuantity }, { returnDocument: 'after' });
+        }
 
     } catch (error) {
         res.status(500).json(error)

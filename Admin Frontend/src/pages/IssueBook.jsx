@@ -8,9 +8,15 @@ function IssueBook() {
 
   const [data, setData] = useState([])
 
+  const token = sessionStorage.getItem("token")
+
   useEffect(() => {
 
-    axios.get(`http://localhost:3000/api/issuebook/allrequest`)
+    axios.get(`http://localhost:3000/api/issuebook/allrequest`, {
+      headers: {
+        Authorization: token
+      }
+    })
       .then((res) => {
         setData(res.data)
       })
@@ -22,7 +28,11 @@ function IssueBook() {
     const cnf = confirm("Are you sure you want to issue this book?")
     if (!cnf) return;
 
-    axios.put(`http://localhost:3000/api/issuebook/confirmbook/${id}`)
+    axios.put(`http://localhost:3000/api/issuebook/confirmbook/${id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
       .then((res) => {
         alert(res.data.message)
       })
@@ -33,7 +43,11 @@ function IssueBook() {
     const cnf = confirm("Are you sure you want to reject this book request?")
     if (!cnf) return;
 
-    axios.put(`http://localhost:3000/api/issuebook/rejectbook/${id}`)
+    axios.put(`http://localhost:3000/api/issuebook/rejectbook/${id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
       .then((res) => {
         alert(res.data.message)
       })
@@ -44,7 +58,11 @@ function IssueBook() {
     const cnf = confirm("Are you sure you want to mark this book as returned?")
     if (!cnf) return;
 
-    axios.put(`http://localhost:3000/api/issuebook/returnbook/${id}`)
+    axios.put(`http://localhost:3000/api/issuebook/returnbook/${id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
       .then((res) => {
         alert(res.data.message)
       })

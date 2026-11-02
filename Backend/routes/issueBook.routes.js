@@ -1,5 +1,8 @@
 const router = require("express").Router();
 const controller = require("../controllers/isuueBook.controller.js")
+const verifyToken = require("../middlewares/verifyToken")
+
+router.use(verifyToken)
 
 router.post("/issuerequest" , controller.issueRequest)
 

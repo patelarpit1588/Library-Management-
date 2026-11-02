@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -9,46 +9,60 @@ import { useDispatch } from 'react-redux';
 function UserProfile() {
 
   const dispatch = useDispatch();
-   const [tab, setTab] = useState('view');
+  const [tab, setTab] = useState('view');
 
   const [oldpass, setOldpass] = useState("")
   const [newpass, setNewpass] = useState("")
   const [conpass, setConpass] = useState("")
 
+  const token = sessionStorage.getItem("token")
 
   const userData = useSelector((state) => state.auth.userData)
   const userName = userData.name;
 
-  const [editData,setEditData] = useState({
+  const [editData, setEditData] = useState({
     name: userData?.name || '',
     email: userData?.email || '',
     phone: userData?.phone || ''
   })
 
-    const editProfile = () => {
+  const editProfile = () => {
 
-    axios.put(`http://localhost:3000/api/users/editprofile/${userData.id}`, { name: editData.name, email:  editData.email, phone: editData.phone })
-    .then((res) => {
-      alert(res.data.message)
-      dispatch(login({
-        id:userData.id,
-        name:editData.name,
-        email:editData.email,
-        phone:editData.phone
-      }))
-      setTab("view")
+    axios.put(`http://localhost:3000/api/users/editprofile/${userData.id}`,
+      { name: editData.name, email: editData.email, phone: editData.phone }, {
+      headers: {
+        Authorization: token
+      }
     })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        alert(res.data.message)
+        dispatch(login({
+          id: userData.id,
+          name: editData.name,
+          email: editData.email,
+          phone: editData.phone
+        }))
+        setTab("view")
+      })
+      .catch((err) => console.log(err))
   }
   const changePass = () => {
-    axios.post(`http://localhost:3000/api/users/getpassword/${userData.id}`)
+    axios.post(`http://localhost:3000/api/users/getpassword/${userData.id}`, {
+      headers: {
+        Authorization: token
+      }
+    })
       .then((res) => {
 
         const userPass = res.data.password
 
         if (userPass === oldpass) {
           if (newpass === conpass) {
-            axios.put(`http://localhost:3000/api/users/changepassword/${userData.id}`, {newPassword: newpass })
+            axios.put(`http://localhost:3000/api/users/changepassword/${userData.id}`, { newPassword: newpass }, {
+              headers: {
+                Authorization: token
+              }
+            })
               .then((res) => {
                 alert(res.data.message)
                 setOldpass("")
@@ -70,20 +84,20 @@ function UserProfile() {
 
 
   return (
-        <div className="flex min-h-screen flex-col bg-gray-100">
+    <div className="flex min-h-screen flex-col bg-gray-100">
 
-        <Navbar />
+      <Navbar />
       <div className="flex-1 mx-auto w-full max-w-4xl px-4 py-10 sm:px-8">
 
-          {/* Page Heading */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">
-              User Profile
-            </h1>
+        {/* Page Heading */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">
+            User Profile
+          </h1>
 
-            <p className="mt-2 text-sm text-gray-500 sm:text-base">
-              View your details, edit your profile, or change your password.
-            </p>
+          <p className="mt-2 text-sm text-gray-500 sm:text-base">
+            View your details, edit your profile, or change your password.
+          </p>
 
           {/* Tabs */}
           {/* Tabs */}
@@ -121,7 +135,7 @@ function UserProfile() {
                   <h3 className="mb-4 text-2xl font-semibold text-gray-700">
                     Personal Information
                   </h3>
-               <div>
+                  <div>
                     <p className='text-md mt-9 text-gray-600 font-semibold'>Name :</p>
                     <p className='text-lg font-semibold '>{userData.name} </p>
                   </div>
@@ -244,7 +258,7 @@ function UserProfile() {
           </div>
 
         </div>
-    </div>
+      </div>
       <Footer />
     </div>
   )

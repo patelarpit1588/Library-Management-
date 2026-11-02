@@ -11,8 +11,14 @@ function Queries() {
 
     const [queries, setQueries] = useState([])
 
+    const token = sessionStorage.getItem("token")
+
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/query/allqueries`)
+        axios.get(`http://localhost:3000/api/query/allqueries`, {
+            headers: {
+                Authorization: token
+            }
+        })
             .then((res) => {
                 setQueries(res.data)
             })

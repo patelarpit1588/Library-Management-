@@ -22,11 +22,12 @@ mongoose.connect(process.env.DB_URL)
 .then(() => console.log("mongoDB connected"))
 .catch((err) => console.log(err.message))
 
-app.use("/api/book", require("./routes/books.routes"))
 
 app.use("/api/admin" ,require("./routes/admin.routes"))
 
 app.use("/api/users" , require("./routes/users.routes"))
+
+app.use("/api/book", require("./routes/books.routes"))
 
 app.use("/api/issuebook" , require("./routes/issueBook.routes"))
 

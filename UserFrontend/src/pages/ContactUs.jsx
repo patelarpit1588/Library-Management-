@@ -10,7 +10,8 @@ function ContactUs() {
 
     const navigate = useNavigate();
 
-    const userData = useSelector((state)=> state.auth.userData)
+    const userData = useSelector((state) => state.auth.userData)
+    const token = sessionStorage.getItem("token")
 
     const [data, setData] = useState({
         name: "",
@@ -25,6 +26,10 @@ function ContactUs() {
             email: userData.email,
             subject: data.subject,
             message: data.message,
+        }, {
+            headers: {
+                Authorization: token
+            }
         })
             .then((res) => {
                 alert(res.data.message)
@@ -204,35 +209,35 @@ function ContactUs() {
                                 We appreciate your feedback and suggestions.
                             </p>
                         </form>
-                <div className="mx-auto mt-10 max-w-7xl">
-                    <div className="flex flex-col items-center justify-between gap-5 rounded-2xl border border-green-100 bg-white p-6 shadow-sm sm:flex-row sm:p-8">
-                        <div className="flex items-start gap-4">
-                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-green-100 text-green-700">
-                                <MessageSquare size={27} />
-                            </div>
+                        <div className="mx-auto mt-10 max-w-7xl">
+                            <div className="flex flex-col items-center justify-between gap-5 rounded-2xl border border-green-100 bg-white p-6 shadow-sm sm:flex-row sm:p-8">
+                                <div className="flex items-start gap-4">
+                                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-green-100 text-green-700">
+                                        <MessageSquare size={27} />
+                                    </div>
 
-                            <div>
-                                <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
-                                    Already submitted a query?
-                                </h3>
+                                    <div>
+                                        <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
+                                            Already submitted a query?
+                                        </h3>
 
-                                <p className="mt-2 max-w-xl text-sm leading-6 text-gray-600 sm:text-base">
-                                    Check your previous queries, track their status, and view
-                                    replies from the library administrator.
-                                </p>
+                                        <p className="mt-2 max-w-xl text-sm leading-6 text-gray-600 sm:text-base">
+                                            Check your previous queries, track their status, and view
+                                            replies from the library administrator.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    onClick={() => navigate("/myqueries")}
+                                    className="flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800 sm:w-auto"
+                                >
+                                    <MessageSquare size={19} />
+                                    View My Queries
+                                </button>
                             </div>
                         </div>
-
-                        <button
-                            type="button"
-                            onClick={() => navigate("/myqueries")}
-                            className="flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-green-700 px-6 py-3 font-semibold text-white transition hover:bg-green-800 sm:w-auto"
-                        >
-                            <MessageSquare size={19} />
-                            View My Queries
-                        </button>
-                    </div>
-                </div>
                     </div>
                 </div>
             </div>

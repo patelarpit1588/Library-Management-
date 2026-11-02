@@ -23,14 +23,14 @@ function Login() {
                 alert(responseData.message);
 
                 if (responseData.token) {
-                    
+
                     const admin = responseData.user;
 
                     sessionStorage.setItem("token", responseData.token);
                     sessionStorage.setItem("adminData", JSON.stringify(admin));
 
                     dispatch(login({
-                        id:admin._id,
+                        id: admin._id,
                         name: admin.name,
                         email: admin.email,
                         phone: admin.phone

@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   MessageSquare,
@@ -17,30 +17,36 @@ import {
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-function MyQueries()  {
+function MyQueries() {
   const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedQuery, setSelectedQuery] = useState(null);
 
   const userEmail = useSelector((state) => state.auth.userData?.email)
-  
-  const [queries,setQueries] = useState([])
 
- useEffect(() => {
-  if (!userEmail) return;
+  const [queries, setQueries] = useState([])
 
-  axios
-    .post("http://localhost:3000/api/query/getuserquery", {
-      email: userEmail,
-    })
-    .then((res) => {
-      setQueries(res.data);
-    })
-    .catch((err) => {
-      console.error("Error fetching user queries:", err);
-    });
-}, [userEmail]);
+  const token = sessionStorage.getItem("token")
+
+  useEffect(() => {
+    if (!userEmail) return;
+
+    axios
+      .post("http://localhost:3000/api/query/getuserquery", {
+        email: userEmail,
+      }, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then((res) => {
+        setQueries(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching user queries:", err);
+      });
+  }, [userEmail]);
 
   const statusStyles = {
     pending: "bg-amber-50 text-amber-700 border-amber-200",
@@ -440,11 +446,10 @@ function MyQueries()  {
                 </p>
 
                 <div
-                  className={`rounded-xl border p-5 ${
-                    selectedQuery.status?.toLowerCase() === "replied"
+                  className={`rounded-xl border p-5 ${selectedQuery.status?.toLowerCase() === "replied"
                       ? "border-green-100 bg-green-50/70"
                       : "border-amber-100 bg-amber-50/50"
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-green-700 shadow-sm">
@@ -516,10 +521,9 @@ const StatusBadge = ({ status, styles }) => {
 
   return (
     <span
-      className={`inline-flex whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-semibold ${
-        styles[normalizedStatus] ||
+      className={`inline-flex whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-semibold ${styles[normalizedStatus] ||
         "border-gray-200 bg-gray-50 text-gray-600"
-      }`}
+        }`}
     >
       {label}
     </span>

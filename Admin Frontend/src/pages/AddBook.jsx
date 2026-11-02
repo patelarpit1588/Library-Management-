@@ -5,6 +5,7 @@ import axios from "axios"
 function Books() {
 
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("token")
 
   const [data, setData] = useState({
     title: "",
@@ -27,7 +28,11 @@ function Books() {
 
     formData.append("image", image);
 
-    axios.post(`http://localhost:3000/api/book/addbook`, formData)
+    axios.post(`http://localhost:3000/api/book/addbook`, formData, {
+      headers: {
+        Authorization: token
+      }
+    })
       .then((res) => {
         alert("Book Added")
         navigate("/books")

@@ -10,6 +10,7 @@ function Navbar() {
     const [showProfile,setShowProfile] = useState(false)
     const authStatus = useSelector((state) => state.auth.authstatus)
     const userData = useSelector((state) => state.auth.userData)
+    const token = sessionStorage.getItem("token")
 
     return (
         <div className="flex justify-between  px-15 bg-gray-50 h-17 w-screen ">

@@ -6,13 +6,17 @@ import Topbar from "./Topbar";
 
 function Books() {
   const navigate = useNavigate();
-
+  const token = sessionStorage.getItem("token")
   const [searchTerm, setSearchTerm] = useState("");
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/book/allbook")
+      .get("http://localhost:3000/api/book/allbook", {
+        headers: {
+          Authorization: token
+        }
+      })
       .then((res) => {
         setBooks(res.data);
       })
@@ -34,7 +38,11 @@ function Books() {
     const conf = confirm("Arw you want to delete the book?")
 
     if (conf) {
-      axios.delete(`http://localhost:3000/api/book/deletebook/${id}`)
+      axios.delete(`http://localhost:3000/api/book/deletebook/${id}`, {
+        headers: {
+          Authorization: token
+        }
+      })
         .then((res) => {
           alert(res.data.message);
           setBooks(prev =>

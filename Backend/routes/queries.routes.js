@@ -1,5 +1,8 @@
 const router = require("express").Router();
 const controller = require("../controllers/queries.controller")
+const verifyToken = require("../middlewares/verifyToken")
+
+router.use(verifyToken)
 
 router.post("/createquery" ,controller.createQuery)
 

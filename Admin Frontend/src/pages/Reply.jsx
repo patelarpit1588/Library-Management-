@@ -8,16 +8,22 @@ function Reply() {
     const location = useLocation();
     const query = location.state?.query
 
-    const [replyMsg,setReplyMsg] = useState(query.reply || "")
+    const token = sessionStorage.getItem("token")
+
+    const [replyMsg, setReplyMsg] = useState(query.reply || "")
 
 
-    const sendReply = () =>{
-        axios.put(`http://localhost:3000/api/query/replyquery/${query._id}`,{reply:replyMsg})
-        .then((res) => {
-            alert(res.data.message)
-            navigate("/queries")
+    const sendReply = () => {
+        axios.put(`http://localhost:3000/api/query/replyquery/${query._id}`, { reply: replyMsg }, {
+            headers: {
+                Authorization: token
+            }
         })
-        .catch((err) => console.log(err))
+            .then((res) => {
+                alert(res.data.message)
+                navigate("/queries")
+            })
+            .catch((err) => console.log(err))
     }
 
     return (
@@ -44,35 +50,35 @@ function Reply() {
                     <form>
                         <label htmlFor='subject' className="font-semibold text-lg text-gray-700">Subject</label>
                         <input
-                        type='text'
-                        id='subject'
-                        value={query.subject}
-                        className="w-full px-4 py-3 mt-1 border bg-gray-200 border-gray-300 rounded-lg mb-3"        
-                        disabled
+                            type='text'
+                            id='subject'
+                            value={query.subject}
+                            className="w-full px-4 py-3 mt-1 border bg-gray-200 border-gray-300 rounded-lg mb-3"
+                            disabled
                         />
-                        
+
                         <label htmlFor='msg' className='text-gray-700 font-semibold text-lg '>Query Message</label>
                         <textarea
-                        id='msg'
-                        rows={5}
-                        value={query.message}
-                        disabled
-                        className= 'w-full bg-gray-200 px-4 py-3 mt-1 border border-gray-300 rounded-lg mb-3'
+                            id='msg'
+                            rows={5}
+                            value={query.message}
+                            disabled
+                            className='w-full bg-gray-200 px-4 py-3 mt-1 border border-gray-300 rounded-lg mb-3'
                         />
                         <label htmlFor='reply' className='text-gray-700 font-semibold text-lg '>Reply Message</label>
                         <textarea
-                        id='reply'
-                        rows={5}
-                        value={replyMsg}
-                        onChange={(e) => setReplyMsg(e.target.value)} 
-                        className= 'w-full px-4 py-3 mt-1 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300'
+                            id='reply'
+                            rows={5}
+                            value={replyMsg}
+                            onChange={(e) => setReplyMsg(e.target.value)}
+                            className='w-full px-4 py-3 mt-1 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300'
                         />
                     </form>
 
-                    <button 
-                    type="button"
-                    onClick={sendReply}
-                    className='px-4 py-3 bg-blue-500 rounded-2xl text-white text-md hover:bg-blue-600 font-semibold   '
+                    <button
+                        type="button"
+                        onClick={sendReply}
+                        className='px-4 py-3 bg-blue-500 rounded-2xl text-white text-md hover:bg-blue-600 font-semibold   '
                     >Send Reply
                     </button>
                     <br />

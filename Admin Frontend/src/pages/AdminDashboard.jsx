@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import {
   BookOpen,
   BookCheck,
@@ -24,7 +24,9 @@ import Topbar from "./Topbar";
 import axios from "axios";
 
 function AdminDashboard() {
+
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("token")
 
   const [dashboardData, setDashboardData] = useState({
     totalBooks: null,
@@ -37,12 +39,16 @@ function AdminDashboard() {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/dashboard/getdashboarddata")
+    axios.get("http://localhost:3000/api/dashboard/getdashboarddata", {
+      headers: {
+        Authorization: token
+      }
+    })
       .then((response) => {
         setDashboardData(response.data);
       })
       .catch((error) => {
-        console.log( error);
+        console.log(error);
       });
   }, []);
 
@@ -68,7 +74,7 @@ function AdminDashboard() {
     },
     {
       title: "Available Copies",
-      value: dashboardData.availableBooks ,
+      value: dashboardData.availableBooks,
       description: "Books available to borrow",
       icon: BookCopy,
       iconBg: "bg-green-100",
@@ -95,7 +101,7 @@ function AdminDashboard() {
     },
     {
       title: "Pending Requests",
-      value: dashboardData.pendingRequests ,
+      value: dashboardData.pendingRequests,
       description: "Awaiting approval",
       icon: Clock,
       iconBg: "bg-yellow-100",
@@ -202,7 +208,7 @@ function AdminDashboard() {
                 users, issue requests, and user queries from one place.
               </p>
             </div>
-         
+
           </section>
 
           {/* Statistics */}
@@ -330,67 +336,67 @@ function AdminDashboard() {
           </section>
 
           {/* Management Overview and Information */}
-{/* Management Overview */}
-<section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+          {/* Management Overview */}
+          <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
 
-  {/* Management Overview */}
-  <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6 xl:col-span-2">
+            {/* Management Overview */}
+            <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6 xl:col-span-2">
 
-    <div className="mb-6 flex items-center justify-between gap-3">
-      <div>
-        <h2 className="text-xl font-bold text-gray-800">
-          Management Overview
-        </h2>
+              <div className="mb-6 flex items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-800">
+                    Management Overview
+                  </h2>
 
-        <p className="mt-1 text-sm text-gray-500">
-          Navigate to different management sections.
-        </p>
-      </div>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Navigate to different management sections.
+                  </p>
+                </div>
 
-      <div className="rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 p-3 text-blue-700">
-        <Library size={23} />
-      </div>
-    </div>
+                <div className="rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 p-3 text-blue-700">
+                  <Library size={23} />
+                </div>
+              </div>
 
-    <div className="divide-y divide-gray-100">
-      {managementItems.map((item) => {
-        const Icon = item.icon;
+              <div className="divide-y divide-gray-100">
+                {managementItems.map((item) => {
+                  const Icon = item.icon;
 
-        return (
-          <button
-            key={item.title}
-            type="button"
-            onClick={() => navigate(item.path)}
-            className="group flex w-full items-center gap-4 py-4 text-left transition first:pt-0 last:pb-0 focus:outline-none"
-          >
-            <div
-              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${item.bg} ${item.color} transition group-hover:scale-105`}
-            >
-              <Icon size={22} />
+                  return (
+                    <button
+                      key={item.title}
+                      type="button"
+                      onClick={() => navigate(item.path)}
+                      className="group flex w-full items-center gap-4 py-4 text-left transition first:pt-0 last:pb-0 focus:outline-none"
+                    >
+                      <div
+                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${item.bg} ${item.color} transition group-hover:scale-105`}
+                      >
+                        <Icon size={22} />
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-semibold text-gray-800 transition group-hover:text-blue-600">
+                          {item.title}
+                        </h3>
+
+                        <p className="mt-1 text-sm leading-5 text-gray-500">
+                          {item.description}
+                        </p>
+                      </div>
+
+                      <ArrowRight
+                        size={19}
+                        className="shrink-0 text-gray-300 transition group-hover:translate-x-1 group-hover:text-blue-600"
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+
             </div>
 
-            <div className="min-w-0 flex-1">
-              <h3 className="font-semibold text-gray-800 transition group-hover:text-blue-600">
-                {item.title}
-              </h3>
-
-              <p className="mt-1 text-sm leading-5 text-gray-500">
-                {item.description}
-              </p>
-            </div>
-
-            <ArrowRight
-              size={19}
-              className="shrink-0 text-gray-300 transition group-hover:translate-x-1 group-hover:text-blue-600"
-            />
-          </button>
-        );
-      })}
-    </div>
-
-  </div>
-
-</section>
+          </section>
 
         </main>
 

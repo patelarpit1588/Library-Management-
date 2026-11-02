@@ -8,8 +8,10 @@ function Books() {
 
     const id = useParams().id;
 
+    const token = sessionStorage.getItem("token")
+
     const [previmage, setPrevImage] = useState(null)
-    const [newImage , setNewImage] = useState(null)
+    const [newImage, setNewImage] = useState(null)
     const [data, setData] = useState({
         title: "",
         author: "",
@@ -19,7 +21,11 @@ function Books() {
     });
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/book/singlebook/${id}`)
+        axios.get(`http://localhost:3000/api/book/singlebook/${id}`, {
+            headers: {
+                Authorization: token
+            }
+        })
             .then((res) => {
                 setData(res.data);
                 setPrevImage(res.data.image_url);
@@ -38,10 +44,14 @@ function Books() {
         formData.append("discription", data.discription);
 
         if (newImage) {
-      formData.append("image", newImage);
-    }
+            formData.append("image", newImage);
+        }
 
-        axios.put(`http://localhost:3000/api/book/editbook/${id}`, formData)
+        axios.put(`http://localhost:3000/api/book/editbook/${id}`, formData, {
+            headers: {
+                Authorization: token
+            }
+        })
             .then((res) => {
                 alert("Book Updates Successfuly")
                 navigate("/books")

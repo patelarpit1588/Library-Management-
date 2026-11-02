@@ -5,6 +5,9 @@ import { NavLink,useNavigate } from 'react-router-dom';
 function Topbar() {
 
     const navigate = useNavigate();
+
+    const token = sessionStorage.getItem("token")
+    
     const [showProfile, setShowProfile] = useState(false);
 
     const adminData = useSelector((state) => state.auth.userData);
@@ -71,7 +74,7 @@ function Topbar() {
                         <div className="absolute right-0 z-50 mt-3 w-56 overflow-hidden rounded-xl border border-gray-200 bg-white py-2 shadow-lg">
 
                             <NavLink
-                                to="/admin/profile"
+                                to="/profile"
                                 onClick={() => setShowProfile(false)}
                                 className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 transition hover:bg-blue-50 hover:text-blue-600"
                             >
@@ -98,7 +101,7 @@ function Topbar() {
                                 type="button"
                                 onClick={() => {
                                     setShowProfile(false)
-                                    navigate("/logout")
+                                    navigate("/")
                                 }}
                                 className="flex w-full items-center gap-3 px-4 py-3 text-sm text-red-600 transition hover:bg-red-50"
                             >

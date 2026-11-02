@@ -14,6 +14,8 @@ function Login() {
         phone: "",
     });
 
+    const token = sessionStorage.getItem("token")
+
     const submit = () => {
 
         if(data.name === "") return alert("Enter name")
